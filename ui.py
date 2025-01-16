@@ -45,10 +45,10 @@ class Ui_MainWindow(object):
         self.comboBox_2.setGeometry(QRect(270, 220, 161, 31))
         self.jam_but = QPushButton(self.centralwidget)
         self.jam_but.setObjectName(u"jam_but")
-        self.jam_but.setGeometry(QRect(460, 220, 80, 25))
+        self.jam_but.setGeometry(QRect(450, 210, 121, 41))
         self.stop_but = QPushButton(self.centralwidget)
         self.stop_but.setObjectName(u"stop_but")
-        self.stop_but.setGeometry(QRect(460, 270, 80, 25))
+        self.stop_but.setGeometry(QRect(460, 270, 101, 41))
         self.scan_interface_but = QPushButton(self.centralwidget)
         self.scan_interface_but.setObjectName(u"scan_interface_but")
         self.scan_interface_but.setGeometry(QRect(270, 30, 161, 31))
@@ -79,6 +79,6 @@ class Ui_MainWindow(object):
         self.scan_interface_but.setText(QCoreApplication.translate("MainWindow", u"Scan Interfaces", None))
         self.start_monitor_but.setText(QCoreApplication.translate("MainWindow", u"Start Monitor Mode", None))
         self.stop_dump_but.setText(QCoreApplication.translate("MainWindow", u"STOP dump", None))
-        self.manage_mode_but.setText(QCoreApplication.translate("MainWindow", u"Monaged mode", None))
+        self.manage_mode_but.setText(QCoreApplication.translate("MainWindow", u"Managed mode", None))
     # retranslateUi
 
