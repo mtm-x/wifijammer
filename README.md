@@ -24,6 +24,7 @@
     ```sh
     sudo apt-get install aircrack-ng
     ```
+    or
     ```sh
     sudo pacman -S aircrack-ng
     ```
