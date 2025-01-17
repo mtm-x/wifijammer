@@ -39,4 +39,6 @@
     ```
     sudo -E python jammer.py
     ```
+## Screenshot
 
+![Screenshot_20250117_144919](https://github.com/user-attachments/assets/a5684559-7260-49b6-a48b-6daaecff2c51)
