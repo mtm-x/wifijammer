@@ -4,7 +4,7 @@ import sys
 import csv
 from time import sleep
 from PySide6.QtWidgets import QApplication, QMainWindow
-from ui import Ui_MainWindow
+from src.ui import Ui_MainWindow
 
 
 class Jammer(QMainWindow):

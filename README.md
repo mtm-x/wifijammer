@@ -9,6 +9,9 @@
 
 ## Installation
 
+Download the bin from the releases and run it with sudo. or 
+
+
 1. Clone the repository:
     ```sh
     git clone https://github.com/mtm-x/wifijammer.git
