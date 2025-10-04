@@ -1,5 +1,7 @@
 # WiFi Jammer LOL
 
+check out the cli script to skip the lib installation ---> ![here](https://github.com/mtm-x/wifijammer-script.git)
+
 ## Requirements
 
 - Python 3.x
