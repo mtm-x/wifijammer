@@ -1,5 +1,7 @@
 dump-01.csv
 mainwindow.ui
-/__pycache__
+*/__pycache__
 t.py
 Jammer.bin
+Jammer_v1.0_x64_Linux.bin
+pysidedeploy.spec
