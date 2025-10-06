@@ -26,9 +26,7 @@ Window {
 
     }
 
-    // property string pkg_clicked: ""
     property bool isProcessing: false
-    property var packagesList
 
     Rectangle {
         id: mainPage
@@ -69,7 +67,7 @@ Window {
 
             background: Rectangle {
                 radius: 6
-                color: customButton.down ? "#1E88E5" : (customButton.hovered ? "#42A5F5" : "#2196F3")
+                color: next_but.down ? "#1E88E5" : (next_but.hovered ? "#42A5F5" : "#2196F3")
                 border.color: "#fff"
                 border.width: 2
             }
@@ -153,7 +151,7 @@ Window {
 
             background: Rectangle {
                 radius: 6
-                color: customButton.down ? "#1E88E5" : (customButton.hovered ? "#42A5F5" : "#2196F3")
+                color: dumpButton.down ? "#1E88E5" : (dumpButton.hovered ? "#42A5F5" : "#2196F3")
                 border.color: "#fff"
                 border.width: 2
             }
@@ -204,7 +202,7 @@ Window {
 
             background: Rectangle {
                 radius: 6
-                color: customButton.down ? "#1E88E5" : (customButton.hovered ? "#42A5F5" : "#2196F3")
+                color: dumpstopbut.down ? "#1E88E5" : (dumpstopbut.hovered ? "#42A5F5" : "#2196F3")
                 border.color: "#fff"
                 border.width: 2
             }
@@ -216,238 +214,69 @@ Window {
                 onClicked: {
 
                     var newModel = jammer.stop_dump()
-                    comboBox.model = []  // Clear first
-                    comboBox.model = newModel  // Then set new model
+                    comboBox.model = []
+                    comboBox.model = newModel
                     isProcessing = false
+                    jamit.visible = true
                 }
             }
         }
-    }
 
-    Rectangle{
-        id : searchPage
-        width: parent.width
-        height: parent.height
-        visible: false
-        color: "#232323"
-
-        Text {
-            text: "Which Application you would like to uninstall"
+        Button {
+            id: jamit
+            text: "Jam itt"
             font.family: productsans.name
-            font.pixelSize: 20
-            font.bold: true
-            color: "white"
-            anchors.top: parent.top
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin:parent.height / 20
-        }
-
-        Label{
-            id : connectedDevice
-            font.family: productsans.name
-            font.pixelSize: 16
-            font.bold: true
-            visible: true
-            color: "white"
-            anchors.top: parent.top
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin:parent.height / 4
-        }
-
-        TextField {
-            id: appName
-            placeholderText : "Search"
-            placeholderTextColor: "#888"
-            width: parent.width / 2
-            height: 40
-            font.family: productsans.name
-            font.pixelSize: 16
-            color: "#000"
-            background: Rectangle {
-                color: "#fff"
-                radius: 6
-                border.color: "#ccc"
-                border.width: 1
-            }
-            onPressed: appName.placeholderText=""
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.leftMargin: parent.width / 6
-            anchors.topMargin: parent.height / 6.5
-
-        }
-
-        Button{
-            id: customButton
-            text: "Search"
             width: 100
-            height: 50
-            font.family: productsans.name
-            font.pixelSize: 16
+            height: 60
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: parent.height / 1.5
+            visible: false
+
             background: Rectangle {
                 radius: 6
-                color: customButton.down ? "#1E88E5" : (customButton.hovered ? "#42A5F5" : "#2196F3")
+                color: jamit.down ? "#D32F2F" : (jamit.hovered ? "#EF5350" : "#F44336")
                 border.color: "#fff"
                 border.width: 2
             }
+            font.pixelSize: 16
 
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 onClicked: {
-                    debloater.app_name(appName.text)
-                    packageModel.clear();
 
-                           var packages = debloater.load_pkgs("Search");
-                           for (var i = 0; i < packages.length; i++) {
-                               packageModel.append({ "packageName": packages[i] });
-                           }
-
+                    jammer.jam(comboBox.currentIndex)
+                    stopjam.visible = true
 
                 }
             }
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.leftMargin: parent.width / 1.4
-            anchors.topMargin: parent.height / 6.8
         }
 
-        ScrollView{
-
-            id : scroll
-            width: 600
-            height: 400
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 210
-            anchors.bottom : parent.bottom
-            anchors.bottomMargin: 80
-
-            ScrollBar.vertical: ScrollBar {
-                    parent: scroll
-                    x: scroll.mirrored ? 0 : scroll.width - width
-                    y: scroll.topPadding
-                    height: scroll.availableHeight
-                    active: scroll.ScrollBar.horizontal.active
-                }
-
-            ListView {
-                id: packageListView
-                anchors.fill: scroll
-
-                model: ListModel {
-                    id: packageModel
-                }
-
-                delegate: Item {
-                    width: scroll.width
-                    height: 40
-
-                    Rectangle {
-                        width: parent.width
-                        height: parent.height
-                        color: "#2E2E2E"
-                        border.color: "#AAAAAA"
-
-                        Text {
-                            text: model.packageName
-                            font.family: productsans.name
-                            color: "white"
-                            anchors.centerIn: parent
-                        }
-
-                    }
-                    MouseArea{
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                            pkg_clicked = model.packageName
-                            searchPage.visible = false
-                            uninstallPage.visible = true
-                            pkgName.text = "Selected Package: "+pkg_clicked
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
-    Rectangle{
-        id: uninstallPage
-        width: parent.width
-        height: parent.height
-        visible: false
-        color: "#232323"
-
-
-        Text {
-            id : pkgName
+        Button {
+            id: stopjam
+            text: "Stop jam"
             font.family: productsans.name
-            font.pixelSize: 16
-            font.bold: true
-            color: "white"
-            anchors.top: parent.top
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: parent.height / 4
-        }
-
-        Column{
+            width: 130
+            height: 60
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: parent.height / 3
-            spacing: 10
-            Button {
-                text: "Uninsttall"
-                font.family: productsans.name
-                width: 150
-                height: 60
+            anchors.topMargin: parent.height / 1.2
+            visible: false
 
-                background: Rectangle {
-                    radius: 6
-                    color: customButton.down ? "#1E88E5" : (customButton.hovered ? "#42A5F5" : "#2196F3")
-                    border.color: "#fff"
-                    border.width: 2
-                }
-                font.pixelSize: 16
-
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: {
-                        pkgName.text = debloater.uninstall(pkg_clicked)
-
-                    }
-                }
+            background: Rectangle {
+                radius: 6
+                color: stopjam.down ? "#1E88E5" : (stopjam.hovered ? "#42A5F5" : "#2196F3")
+                border.color: "#fff"
+                border.width: 2
             }
+            font.pixelSize: 16
 
-            Button {
-                text: "Back"
-                font.family: productsans.name
-                width: 150
-                height: 60
-
-                background: Rectangle {
-                    radius: 6
-                    color: customButton.down ? "#1E88E5" : (customButton.hovered ? "#42A5F5" : "#2196F3")
-                    border.color: "#fff"
-                    border.width: 2
-                }
-                font.pixelSize: 16
-
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: {
-                        uninstallPage.visible = false
-                        searchPage.visible = true
-                        appName.text = ""
-                        packageModel.clear();
-                        var packages = debloater.load_pkgs("");
-                        for (var i = 0; i < packages.length; i++) {
-                            packageModel.append({ "packageName": packages[i] });
-                        }
-                    }
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: {
+                    jammer.stop()
                 }
             }
         }
