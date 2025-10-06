@@ -33,10 +33,9 @@ Download the bin from the releases and run it with sudo. or
 
 Best way is to download the binary from the release and run 
 
-    ```
-    sudo -E ./Jammer_v1.0_x64_Linux.bin
-    ```
-    or wihtout -E arugument
+        sudo -E ./Jammer_v1.0_x64_Linux.bin
+
+or wihtout -E arugument
     
 Run the application with root privileges: ( need to install the requirements )
 
