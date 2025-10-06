@@ -44,6 +44,14 @@ Download the bin from the releases and run it with sudo. or
     ```
     sudo -E python jammer.py
     ```
+
+    Best way is to download the binary from the release and run 
+
+    ```
+    sudo -E ./Jammer_v1.0_x64_Linux.bin
+    ```
+    or wihtout -E arugument
+   
 ## Screenshot
 
 ![Screenshot_20250117_144919](https://github.com/user-attachments/assets/a5684559-7260-49b6-a48b-6daaecff2c51)
