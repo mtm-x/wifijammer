@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/fonts/ProductSansRegular.ttf</file>
+    </qresource>
+</RCC>
